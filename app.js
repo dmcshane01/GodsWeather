@@ -6,6 +6,7 @@ const app = express()
 const apiKey = 'd6de5e5df996b830871c8b772ca80679';
 
 app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use('/js', express.static(__dirname + '/node_modules/bootstrap4/dist/js')); // redirect bootstrap JS
 //app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
