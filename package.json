@@ -1,0 +1,29 @@
+{
+  "name": "app-service-hello-world",
+  "description": "Simple Hello World Node.js sample for Azure App Service",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "author": "Microsoft",
+  "engines": {
+    "node": ">=6.9.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.1",
+    "bootstrap4": "0.0.1-security",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "jquery": "^3.0.0",
+    "popper.js": "^1.14.3",
+    "request": "^2.87.0",
+    "response": "^0.18.0",
+    "stream-browserify": "^2.0.1"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": []
+}

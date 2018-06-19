@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<style>
+    body, html {
+        height: 100%;
+    }
+    .bg {
+        /* The image used */
+        background-image: url("https://images.unsplash.com/photo-1489517456831-3994100a43bd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a31684ae035e64a810b9ec10ff9f6b8a&auto=format&fit=crop&w=1489&q=80");
+
+        /* Full height */
+        height: auto;
+        width: auto;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class="bg">
+<div class="jumbotron text-center" style="margin-bottom: 0; opacity: .5">
+    <h1><b>GODS WEATHER</b></h1>
+    <p>WHAT IS GOD DOING TODAY?</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity:.5">
+    <a class="navbar-brand" href="#">GODSWEATHER.COM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+        </ul>
+    </div>
+</nav>
+
+<div class="text-center  container" style="margin-top:1%">
+    <fieldset >
+        <form action="/" method="post" >
+            <input name="city" type="text"  placeholder="Enter a City" required>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+        <% if(weather !== null){ %>
+        <p><b><%= weather %></b></p>
+        <% } %>
+
+        <% if(error !== null){ %>
+        <p><%= error %></p>
+        <% } %>
+    </fieldset>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
