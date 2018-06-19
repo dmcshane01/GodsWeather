@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use('/js', express.static(__dirname + '/node_modules/bootstrap4/dist/js')); // redirect bootstrap JS
 //app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.set('view engine', 'ejs')
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
     res.render('index', {weather: null, error: null});
