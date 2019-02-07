@@ -54,6 +54,15 @@
         <% if(weather !== null){ %>
         <p><b><%= weather %></b></p>
         <% } %>
+        <h1>Gods 5 Day Forecast</h1>
+
+        <% if(forecast !== null){ %>
+            <%for(var i = 0; i < 5; i++){%>
+            <p>Day <% i %>: <%forecast%></p>
+
+            <% } %>
+        <% } %>
+
 
         <% if(error !== null){ %>
         <p><%= error %></p>

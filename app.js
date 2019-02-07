@@ -14,12 +14,21 @@ app.set('view engine', 'ejs')
 var port = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
-    res.render('index', {weather: null, error: null});
+    res.render('index', {weather: null, forecast: null, error: null});
 })
 
 app.post('/', function (req, res) {
+
+    if(req.body.city.length == 5){
+        //todo checking for zip code
+    }
+
+    var id = ''; //prob bad javascript practice lol
     let city = req.body.city;
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+    let weatherText = '';
+    var url2 = '';
+
 
     request(url, function (err, response, body) {
         if(err){
@@ -29,11 +38,41 @@ app.post('/', function (req, res) {
             if(weather.main == undefined){
                 res.render('index', {weather: null, error: 'Error, please try again'});
             } else {
-                let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-                res.render('index', {weather: weatherText, error: null});
+
+                weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+                id = weather.id; //gets accurate city id for forecast
+                url2 = `http://api.openweathermap.org/data/2.5/forecast?id=${id}&appid=${apiKey}`;
+
+                request(url2, function (err, response, body) {
+                    console.log('FORECAST' + id);
+                    if(err){
+                        res.render('index', {forecast: null, weather: null, error: 'Error, please try again 1st'});
+                    } else {
+                        let forecast = JSON.parse(body);
+                        //let forecast2 = JSON.parse(forecast.list[0].weather);
+                        if(forecast == undefined){
+                            res.render('index', {forecast: null, weather: null, error: 'Error, please try again 2nd'});
+                        } else {
+                            let forecastText = '';
+                            for(i = 0; i < 5; i++){
+                                //forecastText += '\nDay ' + (i+1) + ': ' + forecast.list[i].weather[0].main;
+                            }
+
+                            res.render('index', {forecast: forecast, weather: weatherText, error: null});
+
+                            console.log(forecast.list[0].weather[0].main);
+                        }
+                    }
+                });
+
+               // res.render('index', {weather: weatherText, error: null});
             }
         }
     });
+
+
+
+
 })
 
 app.get('/about', function(req, res) {
@@ -44,66 +83,3 @@ app.listen(port, function () {
     console.log('Example app listening on port 3000!')
 })
 
-/*
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var server = express();
-
-// view engine setup
-server.set('views', path.join(__dirname, 'views'));
-server.set('view engine', 'ejs');
-
-server.use(logger('dev'));
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
-server.use(cookieParser());
-server.use(express.static(path.join(__dirname, 'public')));
-
-server.use('/', indexRouter);
-server.use('/users', usersRouter);
-
-var port = process.env.PORT || 1337;
-
-
-// catch 404 and forward to error handler
-server.use(function(req, res, next) {
-    console.log('Exwhat!')
-  next(createError(404));
-});
-server.post('/', function (req, res) {
-    let city = req.body.city;
-    console.log('OKOKOK');
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-
-    request(url, function (err, response, body) {
-        if(err){
-            res.render('index', {weather: null, error: 'Error, please try again'});
-        } else {
-            let weather = JSON.parse(body)
-            if(weather.main == undefined){
-                res.render('index', {weather: null, error: 'Error, please try again'});
-            } else {
-                let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
-                res.render('index', {weather: weatherText, error: null});
-            }
-        }
-    });
-})
-// error handler
-server.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.server.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-server.listen(port, function () {
-    console.log('Example server listening on port 1337!')
-})
-
-module.exports = server;
-*/
